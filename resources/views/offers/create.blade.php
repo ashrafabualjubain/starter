@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Laravel</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -65,7 +66,7 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            {{--@if (Route::has('login'))
+            @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
@@ -77,23 +78,52 @@
                         @endif
                     @endauth
                 </div>
-            @endif--}}
+            @endif
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Add your offer
                 </div>
 
-                <div class="links">
-                    {{--<a href="{{route('a',55)}}">a</a>
-                    <a href="{{route('b')}}">b</a>--}}
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                @if(Session::has('success'))
+                <div class="alert alert-secondary" role="alert">
+                    {{Session::get('success')}}
                 </div>
+                @endif
+
+                <br>
+                <form method="post" action="{{route('offers.store')}}">
+
+                    @csrf
+                    {{--<input name="_token" value="{{csrf_token()}}">--}}
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Offer Name</label>
+                        <input type="text" class="form-control" name="name" placeholder="name">
+                        @error('name')
+                            <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Offer Price</label>
+                        <input type="text" class="form-control" name="price" placeholder="price">
+                        @error('price')
+                            <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Offer details</label>
+                        <input type="text" class="form-control" name="details" placeholder="details">
+                        @error('details')
+                            <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Save Offer</button>
+                </form>
+
+
             </div>
         </div>
     </body>
