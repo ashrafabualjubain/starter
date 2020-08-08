@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OfferRequest;
 use App\Models\Offer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\Console\Formatter\OutputFormatter;
+use LaravelLocalization;
 
 class CrudController extends Controller
 {
@@ -38,29 +41,31 @@ class CrudController extends Controller
         return view('offers.create');
     }
 
-    public function store(Request $request)
+    public function store(OfferRequest $request)
     {
         //Validate data before insert to database
-        $rules=$this->getRules();
+        /*$rules=$this->getRules();
         $messages=$this->getMessages();
         $validator=Validator::make($request->all(),$rules,$messages);
         if($validator->fails())
         {
             //return $validator->errors();
             return redirect()->back()->withErrors($validator)->withInputs($request->all());
-        }
+        }*/
 
         //insert
         Offer::create([
-           'name' => $request->name,
-           'price' => $request->price,
-           'details' => $request->details,
+           'name_ar' => $request->name_ar,
+            'name_en' => $request->name_en,
+            'price' => $request->price,
+           'details_ar' => $request->details_ar,
+            'details_en' => $request->details_en,
         ]);
         //return 'Saved successfully';
         return redirect()->back()->with(['success'=>'تم اضافة العرض بنجاح']);
     }
 
-    protected function getRules()
+    /*protected function getRules()
     {
         return $rules=[
             'name' => 'required|max:100|unique:offers,name',
@@ -72,11 +77,17 @@ class CrudController extends Controller
     protected function getMessages()
     {
         return $messages=[
-            'name.required' => 'اسم العرض مطلوب',
-            'name.unique' => 'اسم العرض موجود',
+            'name.required' => __('messages.offer name required'),
+            'name.unique' => __('messages.offer name must be unique'),
             'price.numeric' => 'سعر العرض يجب أن يكون أرقام',
-            'price.required' => 'السعر مطلوب',
-            'details.required' => 'تفاصيل العرض مطلوب',
+            'price.required' => __('messages.offer price required'),
+            'details.required' => __('messages.offer details required'),
         ];
+    }*/
+
+    public function getAllOffers()
+    {
+        $offers = Offer::select('id','name_'.LaravelLocalization::getCurrentLocale().' as name','price','details_'.LaravelLocalization::getCurrentLocale().' as details')->get();
+        return view('offers.all',compact('offers'));
     }
 }
