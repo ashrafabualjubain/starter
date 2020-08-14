@@ -116,10 +116,18 @@
                 @endif
 
                 <br>
-                <form method="post" action="{{route('offers.store')}}">
+                <form method="post" action="{{route('offers.store')}}" enctype="multipart/form-data">
 
                     @csrf
                     {{--<input name="_token" value="{{csrf_token()}}">--}}
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">اختر صورة العرض</label>
+                        <input type="file" class="form-control" name="photo">
+                        @error('photo')
+                        <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>
 
                     <div class="form-group">
                         <label for="exampleInputEmail1">{{__('messages.Offer Name_ar')}}</label>

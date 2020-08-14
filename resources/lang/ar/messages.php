@@ -36,6 +36,13 @@ return [
     "name_en"=>'اسم العرض بالانجليزي',
     "details_ar"=>'تفاصيل العرض بالعربي',
     "details_en"=>'تفاصيل العرض بالانجليزي',
-
+    "Edit your offer"=>'تعديل العرض',
+    "operation"=>'العمليات',
+    "update"=>'تحديث',
+    "Offer Image"=>'صورة العرض',
+    "delete"=>'حذف',
+    "offer not exist"=>'العرض غير موجود',
+    "offer deleted successfully"=>'تم حذف العرض بنجاح',
+    "offer photo required"=>'صورة العرض مطلوبة',
 
 ];

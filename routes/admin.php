@@ -10,8 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/*
 Route::get('/admin', function () {
     return 'hello admin';
 });
-
+*/

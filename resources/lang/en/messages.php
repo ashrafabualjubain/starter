@@ -36,5 +36,13 @@ return [
     "name_en"=>'English Offer Name',
     "details_ar"=>'Arabic Offer Details',
     "details_en"=>'English Offer Details',
+    "Edit your offer"=>'Edit your offer',
+    "operation"=>'operation',
+    "update"=>'Update',
+    "Offer Image"=>'Offer Image',
+    "delete"=>'delete',
+    "offer not exist"=>'offer not exist',
+    "offer deleted successfully"=>'offer deleted successfully',
+    "offer photo required"=>'offer photo required',
 
 ];
